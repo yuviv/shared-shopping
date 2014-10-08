@@ -1,0 +1,4 @@
+1. install python 2.7, django 1.7
+2. install postgresql server: http://www.postgresql.org/download/windows/
+3. install psycopg2, a Python to Postgres library. 
+4. cd into backend folder, run python manage.py migrate
