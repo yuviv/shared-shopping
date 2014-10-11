@@ -1,9 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
-	username = models.CharField(max_length=200)
-	password = models.CharField(max_length=50)
+
+# Using Django's contrib.auth User model, adding shoppinglist to it
+class Profile(models.Model):
+	user = models.OneToOneField(User)
 	shopping_list = models.ForeignKey('ShoppingList')
 
 class ShoppingList(models.Model):
@@ -26,11 +28,11 @@ class Item(models.Model):
 
 	num_people_split = models.IntegerField()
 	shopping_list = models.ForeignKey('ShoppingList')
-	bought_by = models.ForeignKey('User')
+	bought_by = models.ForeignKey(User)
 
 class IOU(models.Model):
-	payer = models.ForeignKey('User', related_name='payer')
-	receiver = models.ForeignKey('User', related_name='receiver')
+	payer = models.ForeignKey(User, related_name='payer')
+	receiver = models.ForeignKey(User, related_name='receiver')
 	item = models.ForeignKey("Item")
 
 	UNPAID = 'u'
